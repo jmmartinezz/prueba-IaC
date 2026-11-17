@@ -1,3 +1,3 @@
-entorno = "produccion"
+entorno = "integracion"
 
 nombre_aplicacion = "portal-interno"
