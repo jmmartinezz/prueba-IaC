@@ -28,4 +28,13 @@
 ## 2026-11-17 — Preparación del fallo controlado
 
 - Cambiada temporalmente la ruta del plan de integración a `escenario-inexistente.tfvars`, que no se crea.
-- Este cambio deliberado se publicará en la rama de ejercicio para comprobar el estado `failure` en el resumen y el artefacto. La ruta se restaurará después de verificar la ejecución.
+- Publicado el commit `c49bda6` (`Prueba: ruta de escenario inexistente`) solo en `automatizacion-ejercicio-4`.
+- [Ejecución roja 44088677263](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44088677263): falló `Plan del escenario integracion`; `Formato`, `Validación` y `Plan predeterminado` fueron `success`, y el resumen y la publicación de evidencia también fueron `success`.
+- Mensaje del log: `Given variables file escenario-inexistente.tfvars does not exist.`
+- El resumen reflejó `Plan de integración | failure`; se publicó `evidencia-iac-44088677263-1` hasta el 2026-11-24.
+- `always()` permitió ejecutar los pasos de diagnóstico, sin convertir el trabajo fallido en éxito.
+
+## 2026-11-17 — Corrección del fallo controlado
+
+- Restaurada la ruta `-var-file=escenario-integracion.tfvars`.
+- El commit de corrección y su ejecución verde se documentarán al terminar la verificación en Actions.
