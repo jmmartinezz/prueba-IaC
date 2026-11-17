@@ -16,7 +16,6 @@
 - Añadido el paso `Resumir comprobaciones`, condicionado con `always()`. Escribe el SHA y los cuatro estados en el resumen de Actions y en `evidencia.txt`.
 - Añadido `Publicar evidencia`, también condicionado con `always()`, para adjuntar `evidencia.txt` durante 7 días.
 - El nombre del artefacto incluye `run_id` y `run_attempt`; no se publica el plan.
-- La prueba de fallo controlado, sus ejecuciones y los enlaces de evidencia se registrarán en esta bitácora después de verificarlos.
 
 ## 2026-11-17 — Ejecución correcta inicial
 
@@ -37,4 +36,7 @@
 ## 2026-11-17 — Corrección del fallo controlado
 
 - Restaurada la ruta `-var-file=escenario-integracion.tfvars`.
-- El commit de corrección y su ejecución verde se documentarán al terminar la verificación en Actions.
+- Publicado el commit `646f96c` (`Corregir ruta de escenario`) en `automatizacion-ejercicio-4`.
+- [Ejecución verde corregida 44088903265](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44088903265): trabajo `comprobar` y los cuatro resultados, resumen y publicación completados con éxito.
+- Artefacto `evidencia-iac-44088903265-1`, disponible hasta el 2026-11-24.
+- `evidencia.txt` contiene el SHA analizado y los cuatro estados; no representa aprobación de despliegue. No se ejecutó `tofu apply`.
