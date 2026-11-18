@@ -44,13 +44,16 @@
 - [Ejecución verde corregida 44296101774](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44296101774): los pasos de formato recursivo, validación, ambos planes, resumen y publicación de evidencia concluyeron correctamente.
 - El plan volvió a prever dos fichas por escenario; no se ejecutó `apply`.
 - Añadida a `README.md` la sección `Arquitectura ficticia` para documentar reutilización, escenarios, pipeline, revisión humana y límites de la práctica.
-- La validación posterior al cambio del README se registrará tras la ejecución de Actions.
+- Commit `6681948` (`Ejercicio 5: documentar arquitectura`) publicado en la rama.
+- [Ejecución verde con documentación 44296202040](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44296202040): formato recursivo, validación, ambos planes, resumen y artefacto pasaron.
+- Se publicó `evidencia-iac-44296202040-1`, con retención de siete días.
 
 ## 2026-11-18 — Revisión técnica y límites de validación
 
 - Revisado el diseño del módulo: `source` enlaza la carpeta local, `nombre` y `entorno` son entradas requeridas y `module.portal.resumen` referencia la salida de esa instancia.
-- Revisadas las predicciones de ambas instancias para valores predeterminados e integración. Son predicciones, no resultados de plan comprobados.
+- Las predicciones para valores predeterminados e integración quedaron confirmadas por los planes de la ejecución verde inicial.
 - Confirmado que omitir `nombre` en `module.ayuda` dejaría sin suministrar una entrada obligatoria. El error esperado es de argumento requerido, distinto de un error de formato o de una condición de validación de valor.
 - `git diff --check` pasó; Problems no informa errores en los seis archivos HCL/YAML revisados. `variables.tf` de raíz y `escenario-integracion.tfvars` siguen sin cambios.
-- OpenTofu no está instalado. No se pudo ejecutar `fmt`, `validate` ni los planes localmente.
-- Las comprobaciones ejecutables se realizaron en GitHub Actions. El PR y la integración en `main` se documentarán después de verificarlos.
+- OpenTofu no está instalado localmente; formato, validación y planes se ejecutaron en GitHub Actions.
+- `tofu apply` no se ejecutó. No se han añadido proveedores cloud ni credenciales.
+- El PR y la integración en `main` se documentarán después de verificarlos.
