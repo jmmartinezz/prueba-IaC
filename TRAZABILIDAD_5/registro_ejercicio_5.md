@@ -30,6 +30,13 @@
 - Ambos planes indicaron `2 to add, 0 to change, 0 to destroy`. Son recursos ficticios planificados; no se ejecutó `apply`.
 - Artefacto `evidencia-iac-44295775986-1`, disponible hasta el 2026-11-25.
 
+## 2026-11-18 — Fallo controlado por argumento obligatorio
+
+- En el commit `f716c4c` (`Prueba: falta nombre en módulo ayuda`) se quitó solo `nombre = "portal-ayuda"` de la llamada `module.ayuda`.
+- [Ejecución roja 44295973401](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44295973401): `Comprobar formato` pasó y `Validar` falló con `The argument "nombre" is required, but no definition was found.` Los dos planes quedaron `skipped`.
+- Los pasos de resumen y publicación sí se ejecutaron; el artefacto fue `evidencia-iac-44295973401-1`.
+- El fallo fue deliberado para demostrar que la entrada requerida se valida antes de planificar.
+
 ## 2026-11-18 — Revisión técnica y límites de validación
 
 - Revisado el diseño del módulo: `source` enlaza la carpeta local, `nombre` y `entorno` son entradas requeridas y `module.portal.resumen` referencia la salida de esa instancia.
