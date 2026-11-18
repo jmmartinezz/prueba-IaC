@@ -20,8 +20,15 @@
 - Añadida al final de `README.md` la sección `Arquitectura ficticia`, explicando reutilización, escenarios, comprobaciones y límites del laboratorio.
 - Predicción por configuración: planes de dos fichas, `portal-demo` / `pruebas` y `portal-ayuda` / `pruebas` por defecto; `portal-interno` / `integracion` y `portal-ayuda` / `integracion` en el escenario de integración.
 - `git diff --check` no detectó errores de espacios. El panel Problems no reportó errores en los archivos HCL ni en el workflow.
-- No se ha ejecutado `tofu fmt`, `tofu validate` ni `tofu plan`: OpenTofu no está instalado en este equipo. La validación ejecutable y los planes de Actions requieren publicar los cambios.
-- No se ha hecho commit ni push. No se ejecutará `tofu apply`.
+- No se ejecutará `tofu apply`.
+
+## 2026-11-18 — Primera publicación y planes correctos
+
+- Commit `e40b5c6` (`Ejercicio 5: crear módulo reutilizable`) publicado en `arquitectura-ejercicio-5`.
+- [Ejecución verde inicial 44295775986](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44295775986): formato recursivo, validación, los dos planes, resumen y publicación de evidencia concluyeron correctamente.
+- El plan predeterminado mostró `portal-demo` / `pruebas` y `portal-ayuda` / `pruebas`; integración mostró `portal-interno` / `integracion` y `portal-ayuda` / `integracion`.
+- Ambos planes indicaron `2 to add, 0 to change, 0 to destroy`. Son recursos ficticios planificados; no se ejecutó `apply`.
+- Artefacto `evidencia-iac-44295775986-1`, disponible hasta el 2026-11-25.
 
 ## 2026-11-18 — Revisión técnica y límites de validación
 
@@ -30,5 +37,4 @@
 - Confirmado que omitir `nombre` en `module.ayuda` dejaría sin suministrar una entrada obligatoria. El error esperado es de argumento requerido, distinto de un error de formato o de una condición de validación de valor.
 - `git diff --check` pasó; Problems no informa errores en los seis archivos HCL/YAML revisados. `variables.tf` de raíz y `escenario-integracion.tfvars` siguen sin cambios.
 - OpenTofu no está instalado. No se pudo ejecutar `fmt`, `validate` ni los planes localmente.
-- El ensayo rojo y su corrección verde no se han ejecutado. Para comprobarlos en GitHub Actions hace falta publicar commits, acción que no se ha realizado por instrucción expresa.
-- El PR del ejercicio 5 tampoco se ha creado; requiere publicar la rama. No se hizo commit ni push.
+- El ensayo rojo, la corrección verde, el PR y la integración en `main` se registrarán en las siguientes entradas, después de verificarlos.
