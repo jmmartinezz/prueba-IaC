@@ -37,6 +37,15 @@
 - Los pasos de resumen y publicación sí se ejecutaron; el artefacto fue `evidencia-iac-44295973401-1`.
 - El fallo fue deliberado para demostrar que la entrada requerida se valida antes de planificar.
 
+## 2026-11-18 — Corrección del argumento y documentación
+
+- Restaurado `nombre = "portal-ayuda"` en `module.ayuda`.
+- Commit `9d02f22` (`Corrección: restaurar nombre del módulo`) publicado en `arquitectura-ejercicio-5`.
+- [Ejecución verde corregida 44296101774](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44296101774): los pasos de formato recursivo, validación, ambos planes, resumen y publicación de evidencia concluyeron correctamente.
+- El plan volvió a prever dos fichas por escenario; no se ejecutó `apply`.
+- Añadida a `README.md` la sección `Arquitectura ficticia` para documentar reutilización, escenarios, pipeline, revisión humana y límites de la práctica.
+- La validación posterior al cambio del README se registrará tras la ejecución de Actions.
+
 ## 2026-11-18 — Revisión técnica y límites de validación
 
 - Revisado el diseño del módulo: `source` enlaza la carpeta local, `nombre` y `entorno` son entradas requeridas y `module.portal.resumen` referencia la salida de esa instancia.
@@ -44,4 +53,4 @@
 - Confirmado que omitir `nombre` en `module.ayuda` dejaría sin suministrar una entrada obligatoria. El error esperado es de argumento requerido, distinto de un error de formato o de una condición de validación de valor.
 - `git diff --check` pasó; Problems no informa errores en los seis archivos HCL/YAML revisados. `variables.tf` de raíz y `escenario-integracion.tfvars` siguen sin cambios.
 - OpenTofu no está instalado. No se pudo ejecutar `fmt`, `validate` ni los planes localmente.
-- El ensayo rojo, la corrección verde, el PR y la integración en `main` se registrarán en las siguientes entradas, después de verificarlos.
+- Las comprobaciones ejecutables se realizaron en GitHub Actions. El PR y la integración en `main` se documentarán después de verificarlos.
