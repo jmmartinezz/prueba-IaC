@@ -56,4 +56,14 @@
 - `git diff --check` pasó; Problems no informa errores en los seis archivos HCL/YAML revisados. `variables.tf` de raíz y `escenario-integracion.tfvars` siguen sin cambios.
 - OpenTofu no está instalado localmente; formato, validación y planes se ejecutaron en GitHub Actions.
 - `tofu apply` no se ejecutó. No se han añadido proveedores cloud ni credenciales.
-- El PR y la integración en `main` se documentarán después de verificarlos.
+
+## 2026-11-18 — Revisión, merge e integración en `main`
+
+- Abierto el [PR #3, Arquitectura ejercicio 5](https://github.com/jmmartinezz/prueba-IaC/pull/3), comparando `arquitectura-ejercicio-5` contra `main` en el mismo repositorio.
+- El PR contiene ocho archivos: módulo, llamadas, salida raíz, workflow, README y esta trazabilidad. Los planes usan el escenario correcto y el fallo de prueba no queda en el código final.
+- La ejecución del PR [44296607914](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44296607914) terminó en verde.
+- PR #3 fusionado por `jmmartinezz` el 2026-11-18 a las 11:39:30 UTC.
+- `main` quedó en el merge commit `bfd775b226aeb942a63754f4cafd53a61ccfa68d`; actualizado `main` local mediante fast-forward.
+- [Ejecución final de `main` 44296682288](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44296682288) terminó en verde: formato recursivo, validación, ambos planes, resumen y publicación de evidencia.
+- Artefacto final `evidencia-iac-44296682288-1`, disponible hasta el 2026-11-25.
+- No se ejecutó `tofu apply`.
