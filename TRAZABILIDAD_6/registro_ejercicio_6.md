@@ -24,3 +24,8 @@
 - El usuario autorizó ahora completar el ejercicio mediante commits y push, sustituyendo la restricción anterior de no publicar.
 - Se publicará el validador y el workflow desde `politica-ejercicio-6`. Después se comprobarán las ejecuciones en GitHub Actions.
 - Para demostrar la regla, se probará en un commit separado un entorno distinto solo para `module.ayuda`; tras verificar el rechazo, se restaurará el valor correcto en un commit posterior.
+
+## Prueba negativa deliberada
+
+- En `main.tf`, solo la instancia `ayuda` usa temporalmente `entorno = "desarrollo"` mientras `portal` conserva `var.entorno`.
+- Se espera que `fmt`, `validate` y el plan predeterminado pasen, pero que la política del plan predeterminado rechace los entornos distintos. Este cambio no es el estado final.
