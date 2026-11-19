@@ -32,3 +32,10 @@
 - GitHub Actions, ejecución 30 (`44510526349`): formato, validación y plan predeterminado pasaron; la política falló con `portal y ayuda deben pertenecer al mismo entorno`. Los pasos posteriores de integración quedaron omitidos por el fallo; el resumen y el artefacto de evidencia se publicaron correctamente.
 - El fallo fue el rechazo intencionado de la política, no un error de formato ni de validación de OpenTofu.
 - Restaurado `main.tf` para que ambas instancias reciban `var.entorno`; se publicará la corrección y se verificará la ejecución verde.
+
+## Resultado final publicado
+
+- Commit inicial: `6ced7bd` (`Ejercicio 6: validar los planes de OpenTofu`). GitHub Actions, ejecución 29 (`44510415968`): todos los pasos y ambas políticas pasaron.
+- Commit de corrección: `a5f9258` (`Corrección: alinear entornos de las fichas`). GitHub Actions, ejecución 31 (`44510717590`): todos los pasos y ambas políticas pasaron.
+- La rama remota termina con la configuración correcta: las dos instancias reciben `var.entorno`. El fallo deliberado queda solo como evidencia histórica en el commit previo.
+- No se ejecutó `tofu apply`; el workflow solo inicializa, valida, calcula planes y aplica la política al JSON.
