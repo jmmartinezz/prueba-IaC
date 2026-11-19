@@ -28,4 +28,7 @@
 ## Prueba negativa deliberada
 
 - En `main.tf`, solo la instancia `ayuda` usa temporalmente `entorno = "desarrollo"` mientras `portal` conserva `var.entorno`.
-- Se espera que `fmt`, `validate` y el plan predeterminado pasen, pero que la política del plan predeterminado rechace los entornos distintos. Este cambio no es el estado final.
+- Commit de prueba: `0909588` (`Prueba negativa: rechazar entornos distintos`), publicado en la rama.
+- GitHub Actions, ejecución 30 (`44510526349`): formato, validación y plan predeterminado pasaron; la política falló con `portal y ayuda deben pertenecer al mismo entorno`. Los pasos posteriores de integración quedaron omitidos por el fallo; el resumen y el artefacto de evidencia se publicaron correctamente.
+- El fallo fue el rechazo intencionado de la política, no un error de formato ni de validación de OpenTofu.
+- Restaurado `main.tf` para que ambas instancias reciban `var.entorno`; se publicará la corrección y se verificará la ejecución verde.
