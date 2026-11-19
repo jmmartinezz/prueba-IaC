@@ -42,3 +42,9 @@ El proyecto representa dos fichas, una para el portal principal y otra para ayud
 El plan predeterminado usa `portal-demo` y `pruebas` para el portal; el escenario de integración cambia esos valores a `portal-interno` e `integracion`. La ficha de ayuda mantiene el nombre `portal-ayuda` y recibe el entorno seleccionado. GitHub Actions comprueba recursivamente el formato, valida la configuración y genera ambos planes, un resumen y un artefacto de evidencia.
 
 Este laboratorio solo usa `terraform_data` y ejecuta planes: no aplica infraestructura, no despliega servicios y no genera costes de nube reales. Antes de aprobar una configuración para un entorno real, una persona debe revisar el cambio, el plan, sus evidencias y los requisitos de seguridad, operación y presupuesto.
+
+## Política del laboratorio
+
+La política del ejercicio 6 inspecciona el JSON de cada plan y acepta exactamente dos recursos ficticios `terraform_data`: el portal y la ficha de ayuda. Exige nombres con el prefijo `portal-`, el nombre fijo `portal-ayuda` para ayuda y el mismo entorno (`desarrollo`, `pruebas` o `integracion`) para ambas fichas. `tofu validate` comprueba la coherencia de la configuración; la política añade una regla de negocio sobre los valores previstos en el plan.
+
+Los resultados de formato, validación, planes y políticas aparecen en el resumen de GitHub Actions y en `evidencia.txt`. Los archivos temporales `.tfplan` y el JSON del plan permanecen en el runner; no se publican como artefactos. Este control es didáctico: no despliega infraestructura ni constituye una aprobación de gobierno para producción.
