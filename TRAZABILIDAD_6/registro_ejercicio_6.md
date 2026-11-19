@@ -39,3 +39,9 @@
 - Commit de corrección: `a5f9258` (`Corrección: alinear entornos de las fichas`). GitHub Actions, ejecución 31 (`44510717590`): todos los pasos y ambas políticas pasaron.
 - La rama remota termina con la configuración correcta: las dos instancias reciben `var.entorno`. El fallo deliberado queda solo como evidencia histórica en el commit previo.
 - No se ejecutó `tofu apply`; el workflow solo inicializa, valida, calcula planes y aplica la política al JSON.
+
+## Integración en main
+
+- Pull request #4 (`Politica ejercicio 6`) se fusionó en `main`.
+- Commit de merge: `3fb0c74`. GitHub Actions en `main`, ejecución 34 (`44511045037`): completada correctamente.
+- La copia local de `main` se actualizó con `git pull --ff-only origin main`; el estado local queda sincronizado con `origin/main`.
