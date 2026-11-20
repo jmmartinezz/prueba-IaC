@@ -39,3 +39,10 @@
 - GitHub muestra el PR #6 como fusionado el 2026-11-20 en `catalogo-ejercicio-7`, mediante el commit de merge `990cde7`. [Actions #48](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44728035133) pasó en esa rama.
 - La guía permitía dejar el PR abierto o en borrador, no fusionarlo. La fusión no era necesaria para completar el ejercicio; se registra como una desviación. No se ha intentado revertirla.
 - `main` no recibió ese merge y permanece en `7f2460b`. No se hizo ningún cambio directo en `main`.
+
+## Reversión posterior solicitada
+
+- El usuario pidió revertir el efecto del merge del PR #6.
+- En `catalogo-ejercicio-7` se creó el commit `d81c39b` con `git revert -m 1 990cde7`. Es un commit nuevo que restaura el contenido anterior al merge, sin reescribir ni borrar el historial.
+- El push a `origin/catalogo-ejercicio-7` terminó correctamente. [Actions #50](https://github.com/jmmartinezz/prueba-IaC/actions/runs/44730427886) pasó: formato, validación, los dos planes y las políticas quedaron verdes.
+- GitHub mantiene el PR #6 marcado como fusionado en el historial; el commit de reversión deshace sus cambios en `catalogo-ejercicio-7`. `main` no se modificó.
