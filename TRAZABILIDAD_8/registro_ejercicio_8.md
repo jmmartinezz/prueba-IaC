@@ -27,4 +27,7 @@
 
 - Se restauró `responsable = "equipo-integracion"` en `escenario-integracion.tfvars`.
 - Se añadió en `README.md` la explicación de las etiquetas, la asignación del responsable por entorno, el resultado esperado de la prueba negativa y los límites del laboratorio.
-- La ejecución verde tras restaurar la configuración, el commit correspondiente y el pull request se registrarán al confirmarse en Actions/GitHub.
+- Commit de restauración y documentación: `6ab2b35` (`Ejercicio 8: restaurar responsable y documentar`).
+- Actions, ejecución 45: todos los pasos pasaron, incluidas las dos políticas; se publicó el artefacto de evidencia.
+- La rama remota conserva el responsable correcto para integración. No se ejecutó `tofu apply`.
+- El número y estado del pull request se anotarán una vez creado en GitHub.
