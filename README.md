@@ -54,11 +54,3 @@ Los resultados de formato, validación, planes y políticas aparecen en el resum
 El catálogo local contiene las claves `portal` y `ayuda`; sus valores son, respectivamente, el nombre de la aplicación y `portal-ayuda`. `for_each` crea una instancia del módulo reutilizable por clave, y la salida `resumen` presenta los datos previstos de cada instancia en un mapa con esas mismas claves.
 
 La política autoriza exactamente esas dos direcciones y conserva las reglas del ejercicio 6. Por eso una tercera entrada puede superar `tofu validate` y aparecer en el plan, pero ser rechazada por no estar aprobada. El laboratorio solo calcula planes de `terraform_data`: no despliega recursos ni ofrece un servicio real de autoservicio.
-
-## Etiquetas y responsables
-
-En el ejercicio 8, cada ficha incluye etiquetas ficticias `proyecto`, `entorno` y `responsable` dentro de su entrada `terraform_data`. La variable raíz `responsable` usa `equipo-lab` por defecto; el escenario de integración configura `equipo-integracion`. El módulo reutilizable transmite ese valor y forma el mapa de etiquetas para cada ficha.
-
-La política del plan exige exactamente esas tres etiquetas, el proyecto `nexo-portal`, que la etiqueta de entorno coincida con el entorno de la ficha y que el equipo responsable esté aprobado para ese entorno: `equipo-lab` en `desarrollo` y `pruebas`, y `equipo-integracion` en `integracion`. Así, `tofu validate` puede aceptar la configuración de integración aunque use un responsable válido como cadena; es la política sobre el plan la que aplica esta regla de negocio.
-
-El workflow comprueba ambos escenarios y publica un resumen de sus resultados. La prueba negativa usa temporalmente `equipo-lab` en integración: el plan se genera, pero la política debe rechazarlo. Tras restaurar `equipo-integracion`, las dos políticas deben aprobar. Todo el ejemplo sigue usando valores ficticios y `terraform_data`; no se ejecuta `tofu apply` ni se despliega infraestructura.

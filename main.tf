@@ -6,9 +6,8 @@ locals {
 }
 
 module "fichas" {
-  for_each    = local.catalogo
-  source      = "./modulo_ficha"
-  nombre      = each.value
-  entorno     = var.entorno
-  responsable = var.responsable
+  for_each = local.catalogo
+  source   = "./modulo_ficha"
+  nombre   = each.value
+  entorno  = var.entorno
 }

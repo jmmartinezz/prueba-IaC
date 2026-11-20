@@ -2,18 +2,12 @@ import json
 import sys
 
 
-EXPECTED_INPUTS = {"nombre", "entorno", "etiquetas"}
-EXPECTED_TAGS = {"proyecto", "entorno", "responsable"}
+EXPECTED_INPUTS = {"nombre", "entorno"}
 EXPECTED_RESOURCES = {
     'module.fichas["portal"].terraform_data.ficha': "portal",
     'module.fichas["ayuda"].terraform_data.ficha': "ayuda",
 }
 ALLOWED_ENVIRONMENTS = {"desarrollo", "pruebas", "integracion"}
-EXPECTED_RESPONSABLES_BY_ENVIRONMENT = {
-    "desarrollo": "equipo-lab",
-    "pruebas": "equipo-lab",
-    "integracion": "equipo-integracion",
-}
 
 
 def reject(reason):
@@ -21,14 +15,16 @@ def reject(reason):
     raise SystemExit(1)
 
 
-def contains_true(value):
-    if value is True:
+def is_marked(marker, field):
+    if marker is True:
         return True
-    if isinstance(value, dict):
-        return any(contains_true(item) for item in value.values())
-    if isinstance(value, list):
-        return any(contains_true(item) for item in value)
-    return False
+    if not isinstance(marker, dict):
+        return False
+
+    input_marker = marker.get("input")
+    if input_marker is True:
+        return True
+    return isinstance(input_marker, dict) and input_marker.get(field) is True
 
 
 try:
@@ -73,51 +69,31 @@ for item in changes:
         reject(f"{address} no contiene los valores previstos")
     inputs = after.get("input")
     if not isinstance(inputs, dict) or set(inputs) != EXPECTED_INPUTS:
-        reject(f"{address} debe contener solo nombre, entorno y etiquetas")
+        reject(f"{address} debe contener solo nombre y entorno")
 
     unknown = change.get("after_unknown", {})
     sensitive = change.get("after_sensitive", {})
-    unknown_input = unknown.get("input", {}) if isinstance(unknown, dict) else unknown
-    sensitive_input = (
-        sensitive.get("input", {}) if isinstance(sensitive, dict) else sensitive
-    )
-    if contains_true(unknown_input):
-        reject(f"{address}.input no puede contener valores desconocidos")
-    if contains_true(sensitive_input):
-        reject(f"{address}.input no puede contener valores sensibles")
-
-    if not isinstance(inputs["nombre"], str):
-        reject(f"{address}.nombre debe ser una cadena conocida")
-    if not isinstance(inputs["entorno"], str):
-        reject(f"{address}.entorno debe ser una cadena conocida")
-    tags = inputs["etiquetas"]
-    if not isinstance(tags, dict) or set(tags) != EXPECTED_TAGS:
-        reject(f"{address}.etiquetas debe contener proyecto, entorno y responsable")
-    if any(not isinstance(value, str) for value in tags.values()):
-        reject(f"{address}.etiquetas debe contener cadenas conocidas")
+    for field in EXPECTED_INPUTS:
+        value = inputs[field]
+        if not isinstance(value, str):
+            reject(f"{address}.{field} debe ser una cadena conocida")
+        if is_marked(unknown, field):
+            reject(f"{address}.{field} no puede ser desconocido")
+        if is_marked(sensitive, field):
+            reject(f"{address}.{field} no puede ser sensible")
 
     if not inputs["nombre"].startswith("portal-"):
         reject(f"{address}.nombre debe empezar por portal-")
     if EXPECTED_RESOURCES[address] == "ayuda" and inputs["nombre"] != "portal-ayuda":
         reject("la ficha de ayuda debe llamarse portal-ayuda")
-
-    environment = inputs["entorno"]
-    if environment not in ALLOWED_ENVIRONMENTS:
-        reject("el entorno debe ser desarrollo, pruebas o integracion")
-    if tags["proyecto"] != "nexo-portal":
-        reject(f"{address}.etiquetas.proyecto debe ser nexo-portal")
-    if tags["entorno"] != environment:
-        reject(f"{address}.etiquetas.entorno debe coincidir con el entorno")
-    if tags["responsable"] != EXPECTED_RESPONSABLES_BY_ENVIRONMENT[environment]:
-        reject(f"responsable no aprobado para {environment}")
-    environments[EXPECTED_RESOURCES[address]] = environment
+    environments[EXPECTED_RESOURCES[address]] = inputs["entorno"]
 
 if seen_addresses != set(EXPECTED_RESOURCES):
     reject("el plan debe incluir las fichas portal y ayuda")
 
+if any(value not in ALLOWED_ENVIRONMENTS for value in environments.values()):
+    reject("el entorno debe ser desarrollo, pruebas o integracion")
 if environments["portal"] != environments["ayuda"]:
     reject("portal y ayuda deben pertenecer al mismo entorno")
 
-print(
-    "POLÍTICA APROBADA: dos fichas con etiquetas y responsable ficticios correctos."
-)
+print("POLÍTICA APROBADA: dos fichas ficticias, mismo entorno y sin operaciones reales.")
