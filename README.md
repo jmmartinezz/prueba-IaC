@@ -48,3 +48,9 @@ Este laboratorio solo usa `terraform_data` y ejecuta planes: no aplica infraestr
 La política del ejercicio 6 inspecciona el JSON de cada plan y acepta exactamente dos recursos ficticios `terraform_data`: el portal y la ficha de ayuda. Exige nombres con el prefijo `portal-`, el nombre fijo `portal-ayuda` para ayuda y el mismo entorno (`desarrollo`, `pruebas` o `integracion`) para ambas fichas. `tofu validate` comprueba la coherencia de la configuración; la política añade una regla de negocio sobre los valores previstos en el plan.
 
 Los resultados de formato, validación, planes y políticas aparecen en el resumen de GitHub Actions y en `evidencia.txt`. Los archivos temporales `.tfplan` y el JSON del plan permanecen en el runner; no se publican como artefactos. Este control es didáctico: no despliega infraestructura ni constituye una aprobación de gobierno para producción.
+
+## Catálogo de fichas
+
+El catálogo local contiene las claves `portal` y `ayuda`; sus valores son, respectivamente, el nombre de la aplicación y `portal-ayuda`. `for_each` crea una instancia del módulo reutilizable por clave, y la salida `resumen` presenta los datos previstos de cada instancia en un mapa con esas mismas claves.
+
+La política autoriza exactamente esas dos direcciones y conserva las reglas del ejercicio 6. Por eso una tercera entrada puede superar `tofu validate` y aparecer en el plan, pero ser rechazada por no estar aprobada. El laboratorio solo calcula planes de `terraform_data`: no despliega recursos ni ofrece un servicio real de autoservicio.

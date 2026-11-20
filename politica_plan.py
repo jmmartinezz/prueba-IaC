@@ -4,8 +4,8 @@ import sys
 
 EXPECTED_INPUTS = {"nombre", "entorno"}
 EXPECTED_RESOURCES = {
-    "module.portal.terraform_data.ficha": "portal",
-    "module.ayuda.terraform_data.ficha": "ayuda",
+    'module.fichas["portal"].terraform_data.ficha': "portal",
+    'module.fichas["ayuda"].terraform_data.ficha': "ayuda",
 }
 ALLOWED_ENVIRONMENTS = {"desarrollo", "pruebas", "integracion"}
 
@@ -39,7 +39,7 @@ changes = plan.get("resource_changes")
 if not isinstance(changes, list):
     reject("falta la lista resource_changes")
 if len(changes) != len(EXPECTED_RESOURCES):
-    reject("el plan debe contener exactamente dos cambios")
+    reject("se esperan exactamente las fichas portal y ayuda")
 
 environments = {}
 seen_addresses = set()
